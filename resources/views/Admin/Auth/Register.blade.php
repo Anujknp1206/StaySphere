@@ -4,19 +4,26 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>Authentication</title>
+  <title>Stay Sphere | Register Page </title>
   <!--begin::Primary Meta Tags-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
+  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <meta name="title" content="Authentication Page" />
   <meta name="author" content="ColorlibHQ" />
   <meta name="description" content="Authentication For StaySphere Application" />
   <meta name="keywords" content="StaySphere Login Register" />
   <!--end::Primary Meta Tags-->
   <!--begin::Fonts-->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css"
     integrity="sha256-tXJfXfp6Ewt1ilPzLDtQnJV4hclT9XuaZUKyUvmyr+Q=" crossorigin="anonymous" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <!--end::Fonts-->
   <!--begin::Third Party Plugin(OverlayScrollbars)-->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.10.1/styles/overlayscrollbars.min.css"
@@ -29,157 +36,268 @@
   <!--begin::Required Plugin(AdminLTE)-->
   <link rel="stylesheet" href="{{ url('/') }}/AdminV3/dist/css/adminlte.css" />
   <!--end::Required Plugin(AdminLTE)-->
+  <style>
+    body.hotel-register {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=1600') center center/cover no-repeat;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    body.hotel-register::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(rgba(0, 0, 0, .65), rgba(20, 20, 20, .70));
+    }
+
+    .register-container {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .register-card {
+      width: 460px;
+      max-width: 100%;
+      background: rgba(255, 255, 255, .10);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, .18);
+      border-radius: 20px;
+      padding: 45px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, .40);
+    }
+
+    .register-header {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .logo {
+      width: 220px;
+      max-width: 100%;
+    }
+
+    .register-header h2 {
+      color: #fff;
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .register-header p {
+      color: #d8d8d8;
+      font-size: 15px;
+    }
+
+    .alert-error {
+      background: rgba(220, 53, 69, .18);
+      border: 1px solid rgba(220, 53, 69, .5);
+      color: #ffd7db;
+      padding: 12px 15px;
+      border-radius: 10px;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .input-group {
+      position: relative;
+      margin-bottom: 16px;
+    }
+
+    .input-group input:not([type="file"]) {
+      width: 100%;
+      height: 50px;
+      padding: 0 45px;
+      border: none;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, .15);
+      color: #fff;
+      font-size: 15px;
+      outline: none;
+      box-sizing: border-box;
+    }
+
+    .input-group input::placeholder {
+      color: rgba(255, 255, 255, .65);
+    }
+
+    .input-group input.is-invalid {
+      border: 1px solid #dc3545;
+    }
+
+    .input-group i {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #D4AF37;
+      font-size: 17px;
+    }
+
+    #toggle-password {
+      position: absolute;
+      right: 58px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #D4AF37;
+      font-size: 17px;
+    }
+
+    .field-error {
+      color: #ff9aa2;
+      font-size: 13px;
+      margin: -10px 0 14px 4px;
+    }
+
+    .file-group {
+      background: rgba(255, 255, 255, .15);
+      border-radius: 10px;
+      padding: 10px 14px 10px 45px;
+    }
+
+    .file-group label {
+      color: #d8d8d8;
+      font-size: 13px;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .file-group input[type="file"] {
+      width: 100%;
+      color: #fff;
+      font-size: 13px;
+    }
+
+    .register-btn {
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #d4af37, #b8860b);
+      color: #fff;
+      font-size: 17px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: .35s;
+    }
+
+    .register-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px rgba(212, 175, 55, .45);
+    }
+
+    .login-link {
+      text-align: center;
+      color: #fff;
+      margin-top: 25px;
+    }
+
+    .login-link a {
+      color: #d4af37;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    @media(max-width:576px) {
+      .register-card {
+        width: 90%;
+        padding: 30px;
+      }
+
+      .register-header h2 {
+        font-size: 22px;
+      }
+    }
+  </style>
 </head>
 <!--end::Head-->
 <!--begin::Body-->
 
-<style>
-  .btn-custom {
-    width: 100px;
-    background-color: #800020;
-    color: white;
-    font-weight: 500;
-    transition: background-color 0.6s ease;
-  }
+<body class="hotel-register">
 
-  .btn-custom:hover {
-    background-color: #A52A2A;
-    color: white;
-    font-weight: 650;
-  }
+  <div class="register-container">
+    <div class="register-card">
 
-  .register-card-body {
-    background: linear-gradient(22deg, #8B4513, #ffffff);
-
-  }
-
-  .custom-bg-input {
-    background-color: #f5f5f5;
-    /* light grey */
-  }
-
-  .login-box-msg {
-    font-size: 20px;
-    font-weight: 400px;
-  }
-
-  .link {
-    font-size: 17px;
-    font-weight: 600px;
-
-
-  }
-
-  .link {
-    font-size: 17px;
-    font-weight: 800px;
-  }
-</style>
-
-<body class="register-page bg-body-secondary" style="background: linear-gradient(22deg, #ffffff, #8B4513);">
-  <div class="register-box">
-    <div class="register-logo">
-      <div><a href="{{ url('/portal') }}"></a><img src=" {{ asset('/storage/photos/' . $setting->logo_footer) }}" alt=" "
-          ></a>
+      <div class="register-header">
+        <img src="{{ asset('/storage/photos/' . $setting->logo_footer) }}" class="logo">
+        <h2>Hotel Management</h2>
+        <p>Welcome to the family</p>
       </div>
-    </div>
-    <!-- /.register-logo -->
-    <div class="card">
-      <div class="card-body register-card-body">
-        <p class="register-box-msg">Welcome to the family</p>
-        <form action="{{ route('registerUser') }}" method="post" enctype="multipart/form-data" autocomplete="off">
-          @csrf
-          <div class="input-group mb-3">
-            <input type="text" class="form-control" required name="name" placeholder="Full Name" />
-            <div class="input-group-text"><span class="bi bi-person"></span></div>
-          </div>
-          <div class="input-group mb-3">
-            <input type="email" class="form-control" required name="email" placeholder="Email" />
-            <div class="input-group-text"><span class="bi bi-envelope"></span></div>
-          </div>
-          <div class="input-group mb-3">
-            <input type="phone" class="form-control" required name="phone" placeholder="Phone" />
-            <div class="input-group-text"><span class="bi bi-envelope"></span></div>
-          </div>
-          <div class="input-group mb-3">
-            <input type="password" class="form-control" id="password" required name="password" placeholder="Password" />
-            <div class="input-group-text" style="cursor: pointer;">
-              <span class="bi bi-lock-fill" id="toggle-password" style="cursor: pointer;"></span>
-            </div>
-          </div>
-          <div class="input-group mb-3">
-            <input style="padding:3px;" type="file" class="form-control" name="photo" accept="image/*">
-            <div class="input-group-text"><span class="bi bi-image"></span></div>
-          </div>
 
+      @if (session('error'))
+        <div class="alert-error">{{ session('error') }}</div>
+      @endif
 
-          <!--begin::Row-->
-          <div class="row">
+      <form action="{{ route('registerUser') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
+        @csrf
 
-            <!-- /.col -->
-            <div class="col-12">
-              <div class="d-flex justify-content-end">
-                <button type="submit" class="btn btn-custom ">Register</button>
-              </div>
-            </div>
+        <div class="input-group">
+          <i class="bi bi-person"></i>
+          <input type="text" name="name" value="{{ old('name') }}" placeholder="Full Name" required autofocus>
+        </div>
+        @error('name')
+          <div class="field-error">{{ $message }}</div>
+        @enderror
 
-            <!-- /.col -->
-          </div>
-          <!--end::Row-->
-        </form>
+        <div class="input-group">
+          <i class="bi bi-envelope"></i>
+          <input type="email" name="email" value="{{ old('email') }}" placeholder="Email" required>
+        </div>
+        @error('email')
+          <div class="field-error">{{ $message }}</div>
+        @enderror
 
-        <!-- /.social-auth-links -->
-        <p class="mb-0 link">
-          <a href="{{ url('/portal') }}" class="text-center" style="text-decoration: none; color: black;"> I already
-            have
-            a membership </a>
-        </p>
-      </div>
-      <!-- /.register-card-body -->
+        <div class="input-group">
+          <i class="bi bi-telephone"></i>
+          <input type="tel" name="phone" value="{{ old('phone') }}" placeholder="Phone" required>
+        </div>
+        @error('phone')
+          <div class="field-error">{{ $message }}</div>
+        @enderror
+
+        <div class="input-group">
+          <i class="bi bi-lock"></i>
+          <input id="password" type="password" name="password" placeholder="Password" required>
+          <span id="toggle-password">
+            <i class="bi bi-eye-fill"></i>
+          </span>
+        </div>
+        @error('password')
+          <div class="field-error">{{ $message }}</div>
+        @enderror
+        <button type="submit" class="register-btn">Register</button>
+
+        <div class="login-link">
+          <a href="{{ url('/portal') }}">I already have a membership</a>
+        </div>
+
+      </form>
     </div>
   </div>
+
   @include('sweetalert::alert')
-  <!-- /.login-box -->
-  <!--begin::Third Party Plugin(OverlayScrollbars)-->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-  <script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.10.1/browser/overlayscrollbars.browser.es6.min.js"
-    integrity="sha256-dghWARbRe2eLlIJ56wNB+b760ywulqK3DzZYEpsg2fQ=" crossorigin="anonymous"></script>
-  <!--end::Third Party Plugin(OverlayScrollbars)--><!--begin::Required Plugin(popperjs for Bootstrap 5)-->
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-    crossorigin="anonymous"></script>
-  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <!--end::Required Plugin(popperjs for Bootstrap 5)--><!--begin::Required Plugin(Bootstrap 5)-->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-    integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
-    crossorigin="anonymous"></script>
-  <!--end::Required Plugin(Bootstrap 5)--><!--begin::Required Plugin(AdminLTE)-->
-
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
-    $(document).ready(function () {
-      $('#toggle-password').on('click', function () {
-        try {
-          const passwordInput = $('#password');
-          const icon = $(this);
+    document.getElementById('toggle-password').addEventListener('click', function () {
+      const passwordInput = document.getElementById('password');
+      const icon = this.querySelector('i');
+      const isHidden = passwordInput.type === 'password';
 
-          if (!passwordInput.length) {
-            throw new Error('Password input field not found!');
-          }
-
-          const isPassword = passwordInput.attr('type') === 'password';
-          passwordInput.attr('type', isPassword ? 'text' : 'password');
-
-          icon.toggleClass('bi-lock-fill bi-unlock-fill');
-        } catch (error) {
-          console.error(error); // For debugging in console
-          alert('Something went wrong while toggling password visibility.');
-        }
-      });
+      passwordInput.type = isHidden ? 'text' : 'password';
+      icon.classList.toggle('bi-eye-fill', !isHidden);
+      icon.classList.toggle('bi-eye-slash-fill', isHidden);
     });
   </script>
+
 </body>
-<!--end::Body-->
-</html>
+<!--end::B

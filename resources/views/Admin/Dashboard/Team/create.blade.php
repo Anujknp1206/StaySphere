@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 @extends('admin.dashboard.dashboardlayouts.master')
-
-@section('title', 'Add Team Member')
 
 @section('content')
 
@@ -55,17 +52,3 @@
         </div>
     </div>
 @endsection
-=======
-@extends('admin.dashboard.dashboardlayouts.master')
-
-@section('content')
-<div class="container">
-    <h1>Add Team Member</h1>
-    <form action="{{ route('teams.store') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        @include('admin.dashboard.team.form', ['team' => null])
-        <button class="btn btn-primary">Create</button>
-    </form>
-</div>
-@endsection
->>>>>>> beab6d01e72f6bcc4bb8b316f62c92ba2ce4291b
