@@ -15,12 +15,17 @@
 
     <li class="nav-item dropdown user-menu">
       <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+<<<<<<< HEAD
         @if(auth()->user()->photo)
           <img src="{{ asset('storage/' . auth()->user()->photo) }}" class="user-image rounded-circle shadow" alt="#" />
         @else
           <img src="{{ asset('storage/' . 'images/default-user.jpg') }}" class="user-image rounded-circle shadow"
             alt="#" />
         @endif
+=======
+        <img src="{{ asset('storage/'.auth()->user()->photo) }}" class="user-image rounded-circle shadow" alt="#" />
+        <span class="d-none d-md-inline text-dark">{{ auth()->user()->name }}</span>
+>>>>>>> beab6d01e72f6bcc4bb8b316f62c92ba2ce4291b
       </a>
     </li>
   </ul>
