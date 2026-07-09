@@ -1,5 +1,5 @@
 
-@extends('Admin.Dashboard.Dashboardlayouts.Master')
+@extends('admin.dashboard.dashboardlayouts.master')
 
 @section('content')
 
