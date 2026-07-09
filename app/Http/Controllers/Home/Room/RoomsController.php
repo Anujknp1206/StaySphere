@@ -17,14 +17,14 @@ class RoomsController extends Controller
         $label = 'Room List';
         $rooms = Room::all();
         $facilities = Facility::all();
-        return view('home.room.roomList', compact('rooms', 'facilities', 'label', 'title'));
+        return view('home.room.roomlist', compact('rooms', 'facilities', 'label', 'title'));
     }
     public function show($id)
     {
         $facilities = Room::with('facilities')->findOrFail($id);
         $title = 'StaySphere: Facilities';
         $label = 'Room Facilities';
-        return view('Home.Room.FacilityDetails', compact('facilities', 'title', 'label'));
+        return view('home.room.facilitydetails', compact('facilities', 'title', 'label'));
     }
     public function book($id)
     {
@@ -32,7 +32,7 @@ class RoomsController extends Controller
         $rooms = Room::all();
         $title = 'StaySphere: Book a Room';
         $label = 'Room Details';
-        return view('Home.Room.RoomDetails', compact('room', 'rooms', 'title', 'label'));
+        return view('home.room.roomdetails', compact('room', 'rooms', 'title', 'label'));
     }
 
     // public function storeBooking(Request $request, $id)

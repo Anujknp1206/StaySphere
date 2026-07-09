@@ -18,14 +18,14 @@ class ProfileController extends Controller
         $user = Auth::user();
         $title = $user->name . ' Profile';
 
-        return view('admin.Dashboard.profile.show', compact('user', 'title'));
+        return view('admin.dashboard.profile.show', compact('user', 'title'));
     }
 
     public function edit()
     {
         $user = Auth::user();
         $title = $user->name . ' Profile';
-        return view('admin.Dashboard.profile.edit', compact('user', 'title'));
+        return view('admin.dashboard.profile.edit', compact('user', 'title'));
     }
 
     public function update(Request $request)
@@ -72,7 +72,7 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
         $title = $user->name . ' Profile';
-        return view('admin.Dashboard.profile.changePassword', compact('title'));
+        return view('admin.dashboard.profile.changePassword', compact('title'));
     }
     public function updatePassword(Request $request)
     {

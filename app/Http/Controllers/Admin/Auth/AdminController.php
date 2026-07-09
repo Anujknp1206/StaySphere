@@ -21,7 +21,7 @@ class AdminController extends Controller
         $user = Auth::user();
         $setting = Setting::first();
         $title = $user->name . ' | Lock';
-        return view('Admin.Auth.LockScreen', compact('user', 'title', 'setting'));
+        return view('admin.auth.LockScreen', compact('user', 'title', 'setting'));
     }
 
     public function unlock(Request $request)
@@ -40,14 +40,14 @@ class AdminController extends Controller
     public function login()
     {
         $setting = Setting::first();
-        return view('Admin.Auth.Login', compact('setting'));
+        return view('admin.auth.login', compact('setting'));
     }
 
     // Show register form
     public function register()
     {
         $setting = Setting::first();
-        return view('Admin.Auth.Register', compact('setting'));
+        return view('admin.auth.register', compact('setting'));
     }
 
     // Handle login

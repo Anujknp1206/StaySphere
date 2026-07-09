@@ -32,7 +32,7 @@ class CartController extends Controller
             'orderTotal' => 0,
         ]);
        
-        return view('Home.Cart.cart', [
+        return view('home.cart.cart', [
             'cartItems' => $cart['items'] ?? [],
             'cart' => $cart,
             'label' => $label,

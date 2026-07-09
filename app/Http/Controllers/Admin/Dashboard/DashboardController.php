@@ -33,7 +33,7 @@ class DashboardController extends Controller
         $user = Auth::user();
         $setting=Setting::first();
         $title= $user->name.' | Dashboard'; 
-        return view('admin.Dashboard.dashboard', compact('user','setting','title'));
+        return view('admin.dashboard.dashboard', compact('user','setting','title'));
     } else {
         // User is not authenticated
         return redirect()->route('login');
