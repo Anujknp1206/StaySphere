@@ -28,7 +28,7 @@
         <!-- <div class="preloader"></div> -->
         @include('home.homelayouts.header')
         @if (Route::is('home'))
-            @include('home.homelayouts.mainBanner')
+            @include('home.homelayouts.mainbanner')
         @else
             @include('home.homelayouts.banner')
         @endif
