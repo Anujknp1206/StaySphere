@@ -160,9 +160,31 @@
                                     <div class="image-box">
                                         <figure class="image mb-0">
                                             <a href="{{ route('roomFacilities.book', $room->id) }}">
-                                                <img id="room-image" class="fade-image"
-                                                    src="{{ asset('storage/' . $room->images[0]->image_url) }}" alt="">
+                                               <img id="room-image-{{ $room->id }}"
+     class="fade-image"
+     src="{{ asset('storage/'.$room->images[0]->image_url) }}"
+     alt="">
                                             </a>
+                                            @if($room->images->count() > 1)
+<script>
+(function () {
+
+    const images = @json(
+        $room->images->pluck('image_url')->map(fn($url) => asset('storage/'.$url))
+    );
+
+    let currentIndex = 0;
+ 
+    setInterval(function () {
+        currentIndex = (currentIndex + 1) % images.length;
+
+        document.getElementById('room-image-{{ $room->id }}').src =
+            images[currentIndex];
+    }, 5000);
+
+})();
+</script>
+@endif
                                         </figure>
                                     </div>
                                 @endif
@@ -335,18 +357,4 @@
         </div>
     </section>
     <!-- End Funfact Section -->
-
-    <script>
-        // Convert PHP array of image URLs to JavaScript
-        const images = @json($room->images->pluck('image_url')->map(fn($url) => asset('storage/' . $url)));
-        let currentIndex = 0;
-
-        // Function to change the image
-        function changeImage() {
-            currentIndex = (currentIndex + 1) % images.length;
-            document.getElementById('room-image').src = images[currentIndex];
-        }
-        // Change image every 5 seconds
-        setInterval(changeImage, 5000);
-    </script>
 @endsection
